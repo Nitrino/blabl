@@ -75,6 +75,13 @@ jobs:  # basic units of work in a run
       - store_test_results:  # upload junit test results for display in Test Summary
           path: _build/test/lib/blabl
 
+      - run: mix coveralls.json
+
+      - run:
+          name: Build Success
+          when: on_success
+          command: bash <(curl -s https://codecov.io/bash)
+
 workflows:
   version: 2.1
   test:
