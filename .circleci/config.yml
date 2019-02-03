@@ -1,0 +1,76 @@
+version: 2.1
+
+references:
+  container_config: &container_config
+    docker:  # run the steps with Docker
+      - image: circleci/elixir:1.8.1  # ...with this image as the primary container; this is where all `steps` will run
+        environment:  # environment variables for primary container
+          MIX_ENV: test
+      - image: circleci/postgres:11.1-alpine  # database image
+        environment:  # environment variables for database
+          POSTGRES_USER: postgres
+          POSTGRES_DB: blabl_test
+          POSTGRES_PASSWORD: postgres
+    working_directory: ~/app  # directory where steps will run
+
+  restore_repo: &restore_repo
+    restore_cache:
+      keys:
+        - v1-repo-{{ .Branch }}-{{ .Revision }}
+        - v1-repo-{{ .Branch }}
+        - v1-repo
+
+  restore_mix: &restore_mix
+    restore_cache:  # restores saved mix cache
+      keys:  # list of cache keys, in decreasing specificity
+        - v1-mix-cache-{{ checksum "mix.lock" }}
+        - v1-mix-cache-{{ .Branch }}
+        - v1-mix-cache
+
+  restore_build: &restore_build
+    restore_cache:  # restores saved build cache
+      keys:
+        - v1-build-cache-{{ .Branch }}
+        - v1-build-cache
+
+jobs:  # basic units of work in a run
+  test:
+    <<: *container_config
+    steps:
+      - *restore_repo
+      - checkout  # check out source code to working directory
+      - save_cache:
+          key: v1-repo-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - .
+
+      - run: mix local.hex --force  # install Hex locally (without prompt)
+      - run: mix local.rebar --force  # fetch a copy of rebar (without prompt)
+
+      - *restore_mix
+      - run: mix deps.get
+      - save_cache:  # generate and store mix cache
+          key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+          paths: "deps"
+      - save_cache:  # make another, less specific cache
+          key: v1-mix-cache-{{ .Branch }}
+          paths: "deps"
+      - save_cache:  # you should really save one more cache (just in case)
+          key: v1-mix-cache
+          paths: "deps"
+
+      - *restore_build
+      - run: mix compile
+      - run:  # special utility that stalls main process until DB is ready
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - save_cache: # don't forget to save a *build* cache, too
+          key: v1-build-cache-{{ .Branch }}
+          paths: "_build"
+      - save_cache: # and one more build cache for good measure
+          key: v1-build-cache
+          paths: "_build"
+
+      - run: mix test
+      - store_test_results:  # upload junit test results for display in Test Summary
+          path: _build/test/lib/blabl
