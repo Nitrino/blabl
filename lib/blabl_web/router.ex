@@ -7,6 +7,7 @@ defmodule BlablWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug(QbexWeb.Plugs.CSPHeader)
   end
 
   pipeline :api do
