@@ -74,3 +74,9 @@ jobs:  # basic units of work in a run
       - run: mix test
       - store_test_results:  # upload junit test results for display in Test Summary
           path: _build/test/lib/blabl
+
+workflows:
+  version: 2.1
+  test:
+    jobs:
+      - test
