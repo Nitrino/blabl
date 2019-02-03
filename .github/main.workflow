@@ -1,30 +1,31 @@
-workflow "Tests & Linters & Check Formatting" {
+workflow "Credo & Sobelow & Check Formatting" {
   on = "push"
-  resolves = ["Test", "nitrino/blabl@master", "nitrino/blabl@master-1"]
+  resolves = [
+    "Credo",
+    "Formatter",
+    "Sobelow"
+  ]
+}
+
+action "Credo" {
+  uses = "nitrino/blabl/.github@master"
+  args = "credo --strict"
+  needs = ["Get Dependencies"]
 }
 
 action "Get Dependencies" {
-  uses = "nitrino/blabl@master"
+  uses = "nitrino/blabl/.github@master"
   args = "deps.get"
 }
 
-action "Test" {
-  uses = "nitrino/blabl@master"
+action "Formatter" {
+  uses = "nitrino/blabl/.github@master"
+  args = "format --check-formatted"
   needs = ["Get Dependencies"]
-  args = "test"
-  env = {
-    MIX_ENV = "test"
-  }
 }
 
-action "nitrino/blabl@master" {
-  uses = "nitrino/blabl@master"
-  needs = ["Get Dependencies"]
-  args = "credo --strict"
-}
-
-action "nitrino/blabl@master-1" {
-  uses = "nitrino/blabl@master"
+action "Sobelow" {
+  uses = "nitrino/blabl/.github@master"
   needs = ["Get Dependencies"]
   args = "sobelow --config"
 }
