@@ -3,7 +3,7 @@ workflow "Credo & Sobelow & Check Formatting" {
   resolves = [
     "Credo",
     "Formatter",
-    "Sobelow"
+    "Sobelow",
   ]
 }
 

@@ -11,7 +11,15 @@ defmodule Blabl.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      preferred_cli_env: [check: :test],
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        check: :test,
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+        "coveralls.json": :test
+      ],
       dialyzer: [plt_add_apps: [:ex_unit]]
     ]
   end
@@ -50,7 +58,8 @@ defmodule Blabl.MixProject do
       # Static code analysis
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.4", only: [:dev, :test], runtime: false},
-      {:sobelow, "~> 0.7", only: [:dev, :test]}
+      {:sobelow, "~> 0.7", only: [:dev, :test]},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 
