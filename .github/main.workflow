@@ -35,6 +35,7 @@ action "Codecov" {
   uses = "nitrino/blabl/.github@master"
   needs = ["Get Dependencies"]
   args = "coveralls.json"
+  secrets = ["CODECOV_TOKEN"]
 }
 
 action "Codecov upload" {
