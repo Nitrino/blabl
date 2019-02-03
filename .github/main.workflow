@@ -1,10 +1,10 @@
 workflow "Credo & Sobelow & Check Formatting" {
   on = "push"
   resolves = [
+    "Codecov upload",
     "Credo",
     "Formatter",
     "Sobelow",
-    "Codecov upload",
   ]
 }
 
@@ -17,13 +17,6 @@ action "Credo" {
 action "Get Dependencies" {
   uses = "nitrino/blabl/.github@master"
   args = "deps.get"
-}
-
-action "Codecov upload" {
-  uses = "nitrino/blabl/.github@master"
-  needs = ["Codecov"]
-  runs = "\"$*\""
-  args = "curl -s https://codecov.io/bash"
 }
 
 action "Formatter" {
@@ -43,4 +36,11 @@ action "Codecov" {
   needs = ["Get Dependencies"]
   args = "coveralls.json"
   secrets = ["CODECOV_TOKEN"]
+}
+
+action "Codecov upload" {
+  uses = "nitrino/blabl/.github@master"
+  needs = ["Codecov"]
+  runs = "\"$*\""
+  args = "curl -s https://codecov.io/bash"
 }
