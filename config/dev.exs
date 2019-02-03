@@ -73,3 +73,7 @@ config :blabl, Blabl.Repo,
   database: "blabl_dev",
   hostname: "localhost",
   pool_size: 10
+
+if File.exists?("config/dev.secret.exs") do
+  import_config "dev.secret.exs"
+end

@@ -15,6 +15,8 @@ defmodule BlablWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       # Import conveniences for testing with connections
@@ -27,10 +29,10 @@ defmodule BlablWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Blabl.Repo)
+    :ok = Sandbox.checkout(Blabl.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Blabl.Repo, {:shared, self()})
+      Sandbox.mode(Blabl.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

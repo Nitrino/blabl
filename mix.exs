@@ -10,7 +10,9 @@ defmodule Blabl.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      preferred_cli_env: [check: :test],
+      dialyzer: [plt_add_apps: [:ex_unit]]
     ]
   end
 
@@ -34,7 +36,7 @@ defmodule Blabl.MixProject do
   defp deps do
     [
       {:phoenix, "~> 1.4.0"},
-      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
@@ -42,7 +44,13 @@ defmodule Blabl.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:xandra, github: "nitrino/xandra", branch: "update-db-connection"},
+
+      # Static code analysis
+      {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.4", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.7", only: [:dev, :test]}
     ]
   end
 
@@ -56,7 +64,14 @@ defmodule Blabl.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      check: [
+        "format --check-formatted",
+        "credo --strict",
+        "test",
+        "dialyzer",
+        "sobelow --config"
+      ]
     ]
   end
 end

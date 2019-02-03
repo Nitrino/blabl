@@ -1,0 +1,13 @@
+[
+  verbose: true,
+  private: false,
+  skip: false,
+  router: "",
+  exit: "low",
+  format: "txt",
+  out: "",
+  ignore: ["Config.CSP"],
+  ignore_files: [
+    "config/prod.secret.exs",
+  ]
+]

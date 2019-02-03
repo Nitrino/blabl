@@ -16,3 +16,7 @@ config :blabl, Blabl.Repo,
   database: "blabl_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+if File.exists?("config/test.secret.exs") do
+  import_config "test.secret.exs"
+end
