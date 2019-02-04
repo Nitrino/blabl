@@ -1,7 +1,8 @@
 defmodule Blabl.Accounts.User do
+  @moduledoc false
+
   use Ecto.Schema
   import Ecto.Changeset
-
 
   schema "users" do
     field :email, :string

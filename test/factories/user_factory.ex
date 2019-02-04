@@ -9,7 +9,7 @@ defmodule Blabl.UserFactory do
           login: Faker.Pokemon.name(),
           email: Faker.Internet.email(),
           # credo:disable-for-next-line
-          phone: Faker.Phone.EnUs.phone(),
+          phone: Faker.Phone.EnUs.phone()
         }
       end
 
