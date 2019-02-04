@@ -17,6 +17,13 @@ config :blabl, Blabl.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+config :blabl, Blabl.Guardian,
+  issuer: "Blabla",
+  ttl: {30, :days},
+  verify_issuer: true,
+  secret_key: "zFSwwjUcAyzGroJamjGWGhTsgQLiSQQpr8Ut5H+IRiDUuXASXxXDCwz5Fgna+iee"
+
+
 if File.exists?("config/test.secret.exs") do
   import_config "test.secret.exs"
 end
