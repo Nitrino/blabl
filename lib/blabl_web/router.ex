@@ -20,6 +20,21 @@ defmodule BlablWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/" do
+    pipe_through(:api)
+
+    forward("/api", Absinthe.Plug,
+      schema: BlablWeb.Schema,
+      json_codec: Jason
+    )
+
+    forward("/graphiql", Absinthe.Plug.GraphiQL,
+      schema: BlablWeb.Schema,
+      json_codec: Jason,
+      context: %{pubsub: BlablWeb.Endpoint}
+    )
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", BlablWeb do
   #   pipe_through :api

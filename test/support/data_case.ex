@@ -24,6 +24,7 @@ defmodule Blabl.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Blabl.DataCase
+      import Blabl.Factory
     end
   end
 

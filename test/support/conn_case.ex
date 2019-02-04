@@ -21,7 +21,11 @@ defmodule BlablWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
+      use Blabl.TestHelpers
+
       alias BlablWeb.Router.Helpers, as: Routes
+
+      import Blabl.Factory
 
       # The default endpoint for testing
       @endpoint BlablWeb.Endpoint
