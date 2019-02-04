@@ -18,7 +18,7 @@ config :blabl, Blabl.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :blabl, Blabl.Guardian,
-  issuer: "Blabla",
+  issuer: "Blabl",
   ttl: {30, :days},
   verify_issuer: true,
   secret_key: "zFSwwjUcAyzGroJamjGWGhTsgQLiSQQpr8Ut5H+IRiDUuXASXxXDCwz5Fgna+iee"
