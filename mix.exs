@@ -43,7 +43,7 @@ defmodule Blabl.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.0"},
+      {:phoenix, "~> 1.4.2"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
@@ -54,19 +54,20 @@ defmodule Blabl.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:xandra, github: "nitrino/xandra", branch: "update-db-connection"},
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
 
       # API
       {:absinthe_plug, "~> 1.4.5"},
       {:absinthe_ecto, "~> 0.1.3"},
 
       # Autorization & cryptography
-      {:comeonin, "~> 4.1"},
-      {:bcrypt_elixir, "~> 1.1"},
+      {:comeonin, "~> 5.0"},
+      {:bcrypt_elixir, "~> 2.0"},
       {:guardian, "~> 1.2"},
 
       # Testing
       {:ex_machina, "~> 2.2", only: :test},
-      {:faker, "~> 0.11.2", only: [:dev, :test]},
+      {:faker, "~> 0.11", only: [:dev, :test]},
 
       # Static code analysis
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
