@@ -56,10 +56,6 @@ defmodule Blabl.MixProject do
       {:xandra, github: "nitrino/xandra", branch: "update-db-connection"},
       {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
 
-      # API
-      {:absinthe_plug, "~> 1.4.5"},
-      {:absinthe_ecto, "~> 0.1.3"},
-
       # Autorization & cryptography
       {:comeonin, "~> 5.0"},
       {:bcrypt_elixir, "~> 2.0"},
