@@ -53,7 +53,6 @@ defmodule Blabl.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:xandra, github: "nitrino/xandra", branch: "update-db-connection"},
       {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
 
       # Autorization & cryptography
