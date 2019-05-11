@@ -4,7 +4,7 @@ defmodule Blabl.Repo.Migrations.CreateUsers do
   def change do
     create table(:users) do
       add :login, :string, null: false
-      add :email, :string, null: false
+      add :email, :string
       add :phone, :string
       add :password_hash, :string
 

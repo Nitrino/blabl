@@ -14,8 +14,8 @@ defmodule Blabl.Accounts.User do
     timestamps()
   end
 
-  @required_fields [:login, :email, :password]
-  @optional_fields [:phone]
+  @required_fields [:login, :password]
+  @optional_fields [:phone, :email]
   @attributes @required_fields ++ @optional_fields
 
   @doc false
@@ -25,18 +25,13 @@ defmodule Blabl.Accounts.User do
     |> validate_required(@required_fields)
     |> validate_length(:login, min: 3, max: 255)
     |> validate_length(:password, min: 8, max: 255)
-    |> unique_constraint(:email, downcase: true)
     |> unique_constraint(:login, downcase: true)
     |> put_password_hash()
   end
 
-  defp put_password_hash(changeset) do
-    case changeset do
-      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
-        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
-
-      _ ->
-        changeset
-    end
+  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: pass}} = changeset) do
+    put_change(changeset, :password_hash, Bcrypt.hash_pwd_salt(pass))
   end
+
+  defp put_password_hash(changeset), do: changeset
 end

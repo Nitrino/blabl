@@ -11,14 +11,33 @@ defmodule BlablWeb.Router do
     plug(BlablWeb.Plugs.CSPHeader)
   end
 
+  pipeline :auth do
+    plug Blabl.Auth.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   pipeline :api do
     plug(:accepts, ["json"])
   end
 
   scope "/", BlablWeb do
-    pipe_through(:browser)
+    pipe_through [:browser, :auth]
 
-    get("/", PageController, :index)
+    get "/", PageController, :index
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :login
+    post "/logout", SessionController, :logout
+  end
+
+  # Logged in scope
+  scope "/", BlablWeb do
+    pipe_through [:browser, :auth, :ensure_auth]
+
+    get "/secret", PageController, :secret
   end
 
   # Other scopes may use custom stacks.

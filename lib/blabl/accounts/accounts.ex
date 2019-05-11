@@ -4,9 +4,9 @@ defmodule Blabl.Accounts do
   """
 
   import Ecto.Query, warn: false
-  alias Blabl.Repo
 
   alias Blabl.Accounts.User
+  alias Blabl.Repo
 
   @doc """
   Returns the list of users.
@@ -36,6 +36,8 @@ defmodule Blabl.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
+
+  def get_user_by_login(login), do: Repo.one(from u in User, where: u.login == ^login)
 
   @doc """
   Creates a user.
@@ -100,23 +102,5 @@ defmodule Blabl.Accounts do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
-  end
-
-  @doc """
-  Verify user’s identity based on email and password
-  """
-  def login_with_email_password(email, given_pass) do
-    user = Repo.get_by(User, email: String.downcase(email))
-
-    cond do
-      user && Comeonin.Bcrypt.checkpw(given_pass, user.password_hash) ->
-        {:ok, user}
-
-      user ->
-        {:error, "Incorrect login credentials"}
-
-      true ->
-        {:error, :"User not found"}
-    end
   end
 end

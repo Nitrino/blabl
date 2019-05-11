@@ -28,6 +28,10 @@ config :phoenix, :json_library, Jason
 
 config :phoenix, template_engines: [leex: Phoenix.LiveView.Engine]
 
+config :blabl, Blabl.Auth.Guardian,
+  issuer: "blabl",
+  secret_key: "V2wpli2dYL6EWiS3rQVa2SHLUw6ABGtiqT9rnu3f7fB4P6BS5ahz2F4pN8O2o6PY"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
