@@ -4,7 +4,7 @@ defmodule Blabl.AccountsTest do
   alias Blabl.Accounts
 
   describe "users" do
-    alias Blabl.Accounts.User
+    alias Blabl.Schema.User
 
     @invalid_attrs Map.new(params_for(:user), fn {k, _} -> {k, nil} end)
 

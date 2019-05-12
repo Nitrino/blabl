@@ -1,2 +1,2 @@
 alias Blabl.Repo
-alias Blabl.Accounts.User
+alias Blabl.Schema.User

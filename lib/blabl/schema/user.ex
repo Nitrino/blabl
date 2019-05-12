@@ -1,4 +1,4 @@
-defmodule Blabl.Accounts.User do
+defmodule Blabl.Schema.User do
   @moduledoc false
 
   use Ecto.Schema

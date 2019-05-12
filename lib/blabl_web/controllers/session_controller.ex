@@ -2,7 +2,7 @@ defmodule BlablWeb.SessionController do
   use BlablWeb, :controller
 
   alias Blabl.Accounts
-  alias Blabl.Accounts.User
+  alias Blabl.Schema.User
   alias Blabl.Auth
   alias Blabl.Auth.Guardian
 

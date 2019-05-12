@@ -5,7 +5,7 @@ defmodule Blabl.Accounts do
 
   import Ecto.Query, warn: false
 
-  alias Blabl.Accounts.User
+  alias Blabl.Schema.User
   alias Blabl.Repo
 
   @doc """

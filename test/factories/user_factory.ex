@@ -5,7 +5,7 @@ defmodule Blabl.UserFactory do
   defmacro __using__(_opts) do
     quote do
       def user_factory do
-        %Blabl.Accounts.User{
+        %Blabl.Schema.User{
           login: Faker.Pokemon.name(),
           email: Faker.Internet.email(),
           # credo:disable-for-next-line
@@ -13,7 +13,7 @@ defmodule Blabl.UserFactory do
         }
       end
 
-      def with_password(%Blabl.Accounts.User{} = user, password \\ Faker.String.base64()) do
+      def with_password(%Blabl.Schema.User{} = user, password \\ Faker.String.base64()) do
         %{user | password: password, password_hash: Comeonin.Bcrypt.hashpwsalt(password)}
       end
     end

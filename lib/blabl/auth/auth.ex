@@ -5,7 +5,7 @@ defmodule Blabl.Auth do
 
   import Ecto.Query
 
-  alias Blabl.Accounts.User
+  alias Blabl.Schema.User
   alias Blabl.Repo
 
   def authenticate_user(login, password) do
