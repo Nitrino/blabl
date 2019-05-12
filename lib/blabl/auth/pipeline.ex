@@ -5,7 +5,6 @@ defmodule Blabl.Auth.Pipeline do
 
   use Guardian.Plug.Pipeline,
     otp_app: :blabl,
-    error_handler: Blabl.Auth.ErrorHandler,
     module: Blabl.Auth.Guardian
 
   plug Guardian.Plug.VerifySession, claims: %{"typ" => "access"}
