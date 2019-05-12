@@ -38,6 +38,7 @@ defmodule BlablWeb.Router do
     pipe_through [:browser, :auth, :ensure_auth]
 
     get "/secret", PageController, :secret
+    get "/messenger", MessengerController, :index
   end
 
   # Other scopes may use custom stacks.
