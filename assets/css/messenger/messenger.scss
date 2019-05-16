@@ -1,0 +1,8 @@
+@import "./rooms/rooms.scss";
+@import "./rooms/chat.scss";
+
+.messenger {
+  display: flex;
+  border: 1px solid #EAEAEA;
+  border-radius: 5px;
+}

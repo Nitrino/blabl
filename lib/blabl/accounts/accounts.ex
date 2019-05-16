@@ -5,8 +5,8 @@ defmodule Blabl.Accounts do
 
   import Ecto.Query, warn: false
 
-  alias Blabl.Schema.User
   alias Blabl.Repo
+  alias Blabl.Schema.User
 
   @doc """
   Returns the list of users.

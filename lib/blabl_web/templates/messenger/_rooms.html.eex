@@ -1,3 +1,9 @@
 <div class="rooms">
-  ROOMS LIST
+  <%= for room <- @rooms do %>
+    <div class="rooms__item">
+      <div class="rooms__item__name">
+        <%= room.name %>
+      </div>
+    </div>
+  <% end %>
 </div>
