@@ -4,6 +4,6 @@ defmodule BlablWeb.MessengerController do
   import Phoenix.LiveView.Controller
 
   def index(conn, _params) do
-    live_render(conn, BlablWeb.MessengerView, session: %{})
+    live_render(conn, BlablWeb.MessengerLive, session: %{})
   end
 end
