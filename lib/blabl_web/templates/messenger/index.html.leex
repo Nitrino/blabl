@@ -1,1 +1,4 @@
-<h1>Messenger main page</h1>
+<div class="messenger">
+  <%= render BlablWeb.MessengerView, "_rooms.html", rooms: @rooms %>
+  <%= render BlablWeb.MessengerView, "_chat.html", chat: %{} %>
+</div>
