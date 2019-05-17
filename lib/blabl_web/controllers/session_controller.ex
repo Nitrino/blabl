@@ -11,7 +11,7 @@ defmodule BlablWeb.SessionController do
     maybe_user = Guardian.Plug.current_resource(conn)
 
     if maybe_user do
-      redirect(conn, to: "/secret")
+      redirect(conn, to: Routes.messenger_path(conn, :index))
     else
       render(conn, "new.html", changeset: changeset, action: Routes.session_path(conn, :login))
     end
@@ -25,14 +25,14 @@ defmodule BlablWeb.SessionController do
   def logout(conn, _) do
     conn
     |> Guardian.Plug.sign_out()
-    |> redirect(to: "/login")
+    |> redirect(to: Routes.page_path(conn, :index))
   end
 
   defp login_reply({:ok, user}, conn) do
     conn
     |> put_flash(:success, "Welcome back!")
     |> Guardian.Plug.sign_in(user)
-    |> redirect(to: "/secret")
+    |> redirect(to: Routes.messenger_path(conn, :index))
   end
 
   defp login_reply({:error, reason}, conn) do

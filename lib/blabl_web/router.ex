@@ -26,7 +26,7 @@ defmodule BlablWeb.Router do
   scope "/", BlablWeb do
     pipe_through [:browser, :auth]
 
-    get "/", PageController, :index
+    get "/", SessionController, :new
 
     get "/login", SessionController, :new
     post "/login", SessionController, :login
