@@ -1,6 +1,6 @@
 <div class="rooms">
   <%= for room <- @rooms do %>
-    <div class="rooms__item">
+    <div class="rooms__item" phx-click="show_room" phx-value=<%= room.id %>>
       <div class="rooms__item__name">
         <%= room.name %>
       </div>

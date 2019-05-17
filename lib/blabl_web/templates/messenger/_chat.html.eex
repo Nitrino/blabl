@@ -1,3 +1,9 @@
 <div class="chat">
-  CHAT CONTENT
+  <%= for event <- @events do %>
+    <div class="chat_event">
+      <div class="chat_event__text">
+        <%= event.text %>
+      </div>
+    </div>
+  <% end %>
 </div>
