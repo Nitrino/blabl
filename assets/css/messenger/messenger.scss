@@ -1,7 +1,9 @@
-@import "./rooms/rooms.scss";
-@import "./rooms/chat.scss";
+@import "./common.scss";
+@import "./rooms.scss";
+@import "./chat.scss";
 
 .messenger {
+  background: #F1F1F3;
   display: flex;
   border: 1px solid #EAEAEA;
   border-radius: 5px;
