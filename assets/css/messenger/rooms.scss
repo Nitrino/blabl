@@ -3,12 +3,25 @@
   border-right: 1px solid #EAEAEA;
 
   &__item {
-    display: flex;
-    position: relative;
-    padding: 10px 0;
-    width: 260px;
-    box-shadow: 0 1px 0 0 rgba(0,0,0,0.07);
-    border-bottom: 1px solid #EAEAEA;
+    padding: 0 10px;
+
+    &__content {
+      display: flex;
+      position: relative;
+      padding: 10px 0;
+      width: 260px;
+      box-shadow: 0 1px 0 0 rgba(0,0,0,0.07);
+    }
+
+    &.-active {
+      background: rgba(255,255,255,0.90);
+      box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07);
+      border-radius: 9px;
+
+      .rooms__item__content {
+        box-shadow: none;
+      }
+    }
 
     &__description {
       margin-left: 10px;
