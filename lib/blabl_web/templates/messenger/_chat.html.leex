@@ -1,9 +1,19 @@
 <div class="chat">
   <%= for event <- @events do %>
-    <div class="chat_event">
-      <div class="chat_event__text">
-        <%= event.text %>
-      </div>
+    <div class="chat__event">
+      <%= if event.type == "message" do %>
+        <div class="avatar-circle chat__event__avatar">
+          <%= initials(event.user.login) %>
+        </div>
+        <div class="chat__event__content">
+          <div class="chat__event__text">
+            <%= event.text %>
+          </div>
+          <div class="chat__event__time">
+            1:23 PM
+          </div>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </div>

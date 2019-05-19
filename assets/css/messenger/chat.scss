@@ -4,4 +4,34 @@
   flex: 1;
   background: #FFFFFF;
   overflow-y: scroll;
+
+  &__event {
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-end;
+
+    &__content {
+      margin-left: 15px;
+      padding: 15px 15px 5px 15px;
+      background: #FFFFFF;
+      box-shadow: 0 13px 25px 0 rgba(0,0,0,0.12);
+      border-radius: 15px;
+    }
+
+    &__text {
+      font-size: 14px;
+      color: #46454C;
+      text-align: left;
+    }
+
+    &__time {
+      // position: absolute;
+      // right: 15px;
+      // bottom: 0px;
+      opacity: 0.5;
+      font-size: 11px;
+      color: #000000;
+      text-align: right;
+    }
+  }
 }
