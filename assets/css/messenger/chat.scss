@@ -1,4 +1,7 @@
 .chat {
+  border-radius: 10px 10px 0 0;
+  padding: 15px 40px;
   flex: 1;
-  padding: 10px;
+  background: #FFFFFF;
+  overflow-y: scroll;
 }

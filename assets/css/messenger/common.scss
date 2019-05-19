@@ -1,0 +1,17 @@
+html, body, .container, .phx-connected {
+  height: 100%;
+}
+
+.avatar-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+  background: blue;
+  color: #FFFFFF;
+  background-image: linear-gradient(225deg, #C9A1F0 0%, #7AB2EB 100%);
+}
