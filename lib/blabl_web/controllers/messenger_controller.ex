@@ -1,6 +1,8 @@
 defmodule BlablWeb.MessengerController do
   use BlablWeb, :controller
 
+  plug :put_layout, "messenger.html"
+
   import Phoenix.LiveView.Controller
 
   def index(conn, _params) do
