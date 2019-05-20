@@ -2,6 +2,47 @@
   padding: 10px;
   border-right: 1px solid #EAEAEA;
 
+  &__search {
+    display: flex;
+    align-items: center;
+
+    &__input {
+      width: 200px;
+      margin-left: 10px;
+      padding-left: 15px;
+      background: rgba(0,0,0,0.05);
+      border-radius: 15px;
+      opacity: 0.5;
+      font-size: 14px;
+      color: #000000;
+      text-align: left;
+      box-shadow: none;
+      outline: none;
+    }
+
+    &__button {
+      margin-left: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 0 40px;
+      height: 40px;
+      box-shadow: none;
+      background: #FFFFFF;
+      box-shadow: 0 1px 1px 0 rgba(0,0,0,0.12), 0 1px 4px 0 rgba(0,0,0,0.09);
+      border-radius: 25px;
+      outline: none;
+
+      img {
+        margin-left: 3px;
+      }
+    }
+  }
+
+  &__content {
+    margin-top: 35px;
+  }
+
   &__item {
     padding: 0 10px;
 

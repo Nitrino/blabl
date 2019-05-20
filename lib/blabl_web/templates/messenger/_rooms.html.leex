@@ -1,26 +1,34 @@
 <div class="rooms">
-  <%= for room <- @rooms do %>
-    <%= if room == @active_room do %>
-      <div class="rooms__item -active" phx-click="show_room" phx-value=<%= room.id %>>
-    <%= else %>
-      <div class="rooms__item" phx-click="show_room" phx-value=<%= room.id %>>
-    <%= end %>
-      <div class="rooms__item__content">
-        <div class="avatar-circle">
-          <%= initials(room.name) %>
-        </div>
-        <div class="rooms__item__description">
-          <div class="rooms__item__name">
-            <%= room.name %>
+  <div class="rooms__search">
+    <input class="rooms__search__input" type="text" placeholder="Search">
+    <button class="rooms__search__button">
+      <img src="<%= Routes.static_path(@socket, "/images/icons/plane.svg") %>" alt="Submit button"/>
+    </button>
+  </div>
+  <div class="rooms__content">
+    <%= for room <- @rooms do %>
+      <%= if room == @active_room do %>
+        <div class="rooms__item -active" phx-click="show_room" phx-value=<%= room.id %>>
+      <%= else %>
+        <div class="rooms__item" phx-click="show_room" phx-value=<%= room.id %>>
+      <%= end %>
+        <div class="rooms__item__content">
+          <div class="avatar-circle">
+            <%= initials(room.name) %>
           </div>
-          <div class="rooms__item__last-message">
-            Last message content
+          <div class="rooms__item__description">
+            <div class="rooms__item__name">
+              <%= room.name %>
+            </div>
+            <div class="rooms__item__last-message">
+              Last message content
+            </div>
           </div>
-        </div>
-        <div class="rooms__item__last-message-time">
-          1:23 PM
+          <div class="rooms__item__last-message-time">
+            1:23 PM
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
