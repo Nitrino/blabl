@@ -25,4 +25,9 @@ defmodule Blabl.Messenger do
   def list_events(room_id, user_id) do
     Repo.all(from e in Event, where: e.room_id == ^room_id and e.user_id == ^user_id)
   end
+
+  @doc """
+  Get a single Room by room_id
+  """
+  def get_room!(id), do: Repo.get!(Room, id)
 end
