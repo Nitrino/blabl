@@ -9,10 +9,16 @@ defmodule BlablWeb.MessengerLive do
   end
 
   def mount(session, socket) do
-    rooms = Messenger.list_rooms(session[:user_id])
+    send(self(), {:init_data, session[:user_id]})
+    {:ok, assign(socket, user_id: nil, rooms: [], events: [], active_room: nil)}
+  end
+
+  def handle_info({:init_data, user_id}, socket) do
+    rooms = Messenger.list_rooms(user_id)
     first_romm = rooms |> List.first
-    events = Messenger.list_events(first_romm.id, session[:user_id])
-    {:ok, assign(socket, user_id: session[:user_id], rooms: rooms, events: events, active_room: first_romm)}
+    events = Messenger.list_events(first_romm.id, user_id)
+
+    {:noreply, assign(socket, user_id: user_id, rooms: rooms, events: events, active_room: first_romm)}
   end
 
   def handle_event("show_room", room_id, socket) do
