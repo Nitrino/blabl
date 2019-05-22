@@ -8,6 +8,7 @@ defmodule Blabl.Schema.Room do
     field :name, :string
     field :topic, :string
 
+    has_many :user_rooms, Schema.UserRoom
     many_to_many :users, Schema.User, join_through: "user_rooms"
 
     timestamps()

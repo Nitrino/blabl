@@ -33,11 +33,14 @@ defmodule BlablWeb.MessengerLive do
     {:noreply, assign(socket, events: events)}
   end
 
-  def fetch_data(user_id) do
-    rooms = Messenger.list_rooms(user_id)
-    first_romm = rooms |> List.first
-    events = Messenger.list_events(first_romm.id, user_id)
-
-    [user_id: user_id, rooms: rooms, events: events, active_room: first_romm]
+  defp fetch_data(user_id) do
+    [user_id: user_id, rooms: [], events: [], active_room: nil]
+    case Messenger.list_rooms(user_id) do
+      [] -> [user_id: user_id, rooms: [], events: [], active_room: nil]
+      rooms ->
+        first_romm = rooms |> List.first
+        events = Messenger.list_events(first_romm.id, user_id)
+        [user_id: user_id, rooms: rooms, events: events, active_room: first_romm]
+    end
   end
 end

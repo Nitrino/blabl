@@ -6,8 +6,10 @@ defmodule Blabl.Messenger do
   import Ecto.Query, warn: false
 
   alias Blabl.Repo
-  alias Blabl.Schema.Room
   alias Blabl.Schema.Event
+  alias Blabl.Schema.Room
+  alias Blabl.Schema.UserRoom
+  alias Blabl.Schema.User
 
   @doc """
   Returns the list of rooms.
@@ -19,7 +21,8 @@ defmodule Blabl.Messenger do
 
   """
   def list_rooms(user_id) do
-    Repo.all(Room)
+    query = from r in Room, join: ur in UserRoom, on: r.id == ur.room_id, where: ur.user_id == ^user_id
+    Repo.all(query)
   end
 
   def list_events(room_id, user_id) do
