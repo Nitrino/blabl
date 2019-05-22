@@ -2,7 +2,6 @@
   <div class="session">
     <h2 class="session__title">Join to Blabl</h2>
     <%= render "_form.html", changeset: @changeset, action: @action %>
-
     <%= link "or sign in", to: Routes.session_path(@conn, :new), class: "session__link" %>
   </div>
 </div>

@@ -2,9 +2,9 @@ defmodule BlablWeb.SessionController do
   use BlablWeb, :controller
 
   alias Blabl.Accounts
-  alias Blabl.Schema.User
   alias Blabl.Auth
   alias Blabl.Auth.Guardian
+  alias Blabl.Schema.User
 
   def new(conn, _) do
     changeset = Accounts.change_user(%User{})
