@@ -2,4 +2,9 @@
 
 // @import "./phoenix.scss";
 
+@import "./session/session.scss";
 @import "./messenger/messenger.scss";
+
+input {
+  outline: none;
+}
