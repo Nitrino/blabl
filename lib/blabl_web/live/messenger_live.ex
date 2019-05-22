@@ -26,4 +26,11 @@ defmodule BlablWeb.MessengerLive do
     room = Messenger.get_room!(room_id)
     {:noreply, assign(socket, events: events, active_room: room)}
   end
+
+  def handle_event("send_message", %{"message" => message}, socket) do
+    %{active_room: active_room, user_id: user_id} = socket.assigns
+    event = Messenger.create_message(%{text: message, room_id: active_room.id, user_id: user_id})
+    events = socket.assigns.events ++ [event]
+    {:noreply, assign(socket, events: events)}
+  end
 end
