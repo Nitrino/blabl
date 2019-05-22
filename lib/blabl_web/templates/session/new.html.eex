@@ -1,21 +1,7 @@
-<div class="login__wrapper">
-  <div class="login">
-    <h2 class="login__title">Blabl Messanger</h2>
-    <%= form_for @changeset, @action, fn f -> %>
-
-      <div class="form-group">
-        <%= text_input f, :login, class: "form-control", placeholder: "Login" %>
-        <%= error_tag f, :login %>
-      </div>
-
-      <div class="form-group">
-        <%= password_input f, :password, class: "form-control", placeholder: "Password" %>
-        <%= error_tag f, :password %>
-      </div>
-
-      <div class="form-group">
-        <%= submit "Submit", class: "btn btn-primary" %>
-      </div>
-    <% end %>
+<div class="session__wrapper">
+  <div class="session">
+    <h2 class="session__title">Login to Blabl </h2>
+    <%= render "_form.html", changeset: @changeset, action: @action %>
+    <%= link "or sign up", to: Routes.session_path(@conn, :join), class: "session__link" %>
   </div>
 </div>

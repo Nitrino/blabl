@@ -17,6 +17,25 @@ defmodule BlablWeb.SessionController do
     end
   end
 
+  def join(conn, _) do
+    changeset = Accounts.change_user(%User{})
+    render(conn, "join.html", changeset: changeset, action: Routes.session_path(conn, :sign_up))
+  end
+
+  def sign_up(conn, %{"user" => user_params}) do
+    case Accounts.create_user(user_params) do
+      {:ok, user} ->
+        conn
+        |> put_status(:created)
+        |> Guardian.Plug.sign_in(user)
+        |> redirect(to: Routes.messenger_path(conn, :index))
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(conn, "new.html", changeset: changeset, action: Routes.session_path(conn, :login))
+    end
+  end
+
   def login(conn, %{"user" => %{"login" => login, "password" => password}}) do
     Auth.authenticate_user(login, password)
     |> login_reply(conn)

@@ -30,6 +30,8 @@ defmodule BlablWeb.Router do
 
     get "/login", SessionController, :new
     post "/login", SessionController, :login
+    get "/join", SessionController, :join
+    post "/join", SessionController, :sign_up
     post "/logout", SessionController, :logout
   end
 
