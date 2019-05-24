@@ -22,7 +22,13 @@ defmodule Blabl.Messenger do
   """
   def list_rooms(user_id) do
     query = from r in Room, join: ur in UserRoom, on: r.id == ur.room_id, where: ur.user_id == ^user_id
-    Repo.all(query)
+    query
+    |> Repo.all
+    |> Repo.preload([events: from(e in Event , order_by: [desc: e.inserted_at], limit: 1)])
+  end
+
+  def room_users_count(room_id) do
+    Repo.one(from ur in UserRoom, select: count(ur.id), where: ur.room_id == ^room_id)
   end
 
   def list_events(room_id, user_id) do

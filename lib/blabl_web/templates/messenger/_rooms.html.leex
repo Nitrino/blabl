@@ -7,7 +7,7 @@
   </div>
   <div class="rooms__content">
     <%= for room <- @rooms do %>
-      <%= if room == @active_room do %>
+      <%= if room.id == @active_room.id do %>
         <div class="rooms__item -active" phx-click="show_room" phx-value=<%= room.id %>>
       <%= else %>
         <div class="rooms__item" phx-click="show_room" phx-value=<%= room.id %>>
@@ -20,9 +20,11 @@
             <div class="rooms__item__name">
               <%= room.name %>
             </div>
-            <div class="rooms__item__last-message">
-              Last message content
-            </div>
+            <%= if Enum.count(room.events) > 0 do %>
+              <div class="rooms__item__last-message">
+                <%= Enum.at(room.events, 0).text %>
+              </div>
+            <% end %>
           </div>
           <div class="rooms__item__last-message-time">
             1:23 PM
