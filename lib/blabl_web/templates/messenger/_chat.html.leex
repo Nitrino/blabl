@@ -1,11 +1,11 @@
 <div class="chat">
   <div class="chat__header">
     <div class="avatar-circle chat__event__avatar">
-      <%= initials(@active_room.name) %>
+      <%= initials(@room.name) %>
     </div>
     <div class="chat__info">
       <div class="chat__header__name">
-        <%= @active_room.name %>
+        <%= @room.name %>
       </div>
       <div class="chat__header__members">
         125 members
@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="chat__content">
-    <%= for event <- @events do %>
+    <%= for event <- Enum.reverse(@room.events) do %>
       <div class="chat__event">
         <%= if event.type == "message" do %>
           <div class="avatar-circle chat__event__avatar">

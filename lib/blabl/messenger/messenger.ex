@@ -8,8 +8,9 @@ defmodule Blabl.Messenger do
   alias Blabl.Repo
   alias Blabl.Schema.Event
   alias Blabl.Schema.Room
-  alias Blabl.Schema.UserRoom
   alias Blabl.Schema.User
+  alias Blabl.Schema.UserRoom
+
 
   @doc """
   Returns the list of rooms.
@@ -22,9 +23,10 @@ defmodule Blabl.Messenger do
   """
   def list_rooms(user_id) do
     query = from r in Room, join: ur in UserRoom, on: r.id == ur.room_id, where: ur.user_id == ^user_id
+
     query
     |> Repo.all
-    |> Repo.preload([events: from(e in Event , order_by: [desc: e.inserted_at], limit: 1)])
+    |> Repo.preload([events: (from e in Event, order_by: [desc: e.inserted_at], limit: 50, preload: :user)])
   end
 
   def room_users_count(room_id) do

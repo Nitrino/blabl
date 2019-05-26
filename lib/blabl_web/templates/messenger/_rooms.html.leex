@@ -6,8 +6,8 @@
     </button>
   </div>
   <div class="rooms__content">
-    <%= for room <- @rooms do %>
-      <%= if room.id == @active_room.id do %>
+    <%= for {id, room} <- @rooms do %>
+      <%= if id == @active_room_id do %>
         <div class="rooms__item -active" phx-click="show_room" phx-value=<%= room.id %>>
       <%= else %>
         <div class="rooms__item" phx-click="show_room" phx-value=<%= room.id %>>
@@ -22,7 +22,7 @@
             </div>
             <%= if Enum.count(room.events) > 0 do %>
               <div class="rooms__item__last-message">
-                <%= Enum.at(room.events, 0).text %>
+                <%= List.first(room.events).text %>
               </div>
             <% end %>
           </div>
