@@ -20,9 +20,6 @@ defmodule BlablWeb.MessengerLive do
     {:noreply, assign(socket, user_id: user_id, rooms: rooms, active_room_id: active_room.id)}
   end
 
-    {:noreply, assign(socket, user_id: user_id, rooms: rooms, events: events, active_room: first_romm)}
-  end
-
   def handle_event("show_room", room_id, socket) do
     active_room = Map.get(socket.assigns.rooms, String.to_integer(room_id))
     events = Messenger.list_events(active_room.id, socket.assigns.user_id)
