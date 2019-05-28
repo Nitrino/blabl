@@ -33,12 +33,16 @@
   </div>
 
   <div class="chat__message">
-    <form phx-submit="send_message" autocomplete="off">
+    <%= form_for @message, "#", [phx_submit: :send_message, autocomplete: "off"], fn _f -> %>
+      <%= hidden_input :message, :user_id, value: @current_user.id %>
+      <%= hidden_input :message, :room_id, value: @room.id %>
       <div class="chat__message__content">
-        <input class="chat__message__input" name="message" rows=1 placeholder="Write a message" autocomplete="off" ></input>
+        <%= text_input :message, :text,
+          placeholder: "Write a message", autocomplete: "off", class: "chat__message__input" %>
         <button type="submit">
           <img src="<%= Routes.static_path(@socket, "/images/icons/plane.svg") %>" alt="Send message button"/>
         </button>
-      </textarea>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -4,6 +4,6 @@ defmodule BlablWeb.MessengerView do
   def initials(name) do
     name
     |> String.slice(0..1)
-    |> String.upcase
+    |> String.upcase()
   end
 end

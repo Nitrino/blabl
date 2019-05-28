@@ -15,7 +15,7 @@ defmodule Blabl.Schema.Event do
   end
 
   @doc false
-  def changeset(event, attrs) do
+  def changeset(event, attrs \\ %{}) do
     event
     |> cast(attrs, [:text, :user_id, :room_id, :type])
     |> validate_required([:user_id, :room_id, :type])

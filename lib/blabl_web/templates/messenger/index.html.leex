@@ -2,7 +2,8 @@
   <div class="messenger">
   <%= if @active_room_id do %>
     <%= render BlablWeb.MessengerView, "_rooms.html", rooms: @rooms, active_room_id: @active_room_id, socket: @socket %>
-    <%= render BlablWeb.MessengerView, "_chat.html", room: @rooms[@active_room_id], socket: @socket %>
+    <%= render BlablWeb.MessengerView, "_chat.html",
+      room: @rooms[@active_room_id], socket: @socket, message: @message, current_user: @current_user %>
   <% else %>
     Load ...
   <% end %>

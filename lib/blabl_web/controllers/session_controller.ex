@@ -29,6 +29,7 @@ defmodule BlablWeb.SessionController do
         |> put_status(:created)
         |> Guardian.Plug.sign_in(user)
         |> redirect(to: Routes.messenger_path(conn, :index))
+
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

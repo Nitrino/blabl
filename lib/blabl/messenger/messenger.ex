@@ -8,9 +8,7 @@ defmodule Blabl.Messenger do
   alias Blabl.Repo
   alias Blabl.Schema.Event
   alias Blabl.Schema.Room
-  alias Blabl.Schema.User
   alias Blabl.Schema.UserRoom
-
 
   @doc """
   Returns the list of rooms.
@@ -25,8 +23,15 @@ defmodule Blabl.Messenger do
     query = from r in Room, join: ur in UserRoom, on: r.id == ur.room_id, where: ur.user_id == ^user_id
 
     query
-    |> Repo.all
-    |> Repo.preload([events: (from e in Event, order_by: [desc: e.inserted_at], limit: 50, preload: :user)])
+    |> Repo.all()
+    |> Repo.preload(events: from(e in Event, order_by: [desc: e.inserted_at], limit: 50, preload: :user))
+  end
+
+  def list_rooms_map(current_user) do
+    case __MODULE__.list_rooms(current_user.id) do
+      [] -> %{}
+      rooms -> Enum.reduce(rooms, %{}, fn room, acc -> Map.put(acc, room.id, room) end)
+    end
   end
 
   def room_users_count(room_id) do
@@ -35,8 +40,9 @@ defmodule Blabl.Messenger do
 
   def list_events(room_id, user_id) do
     query = from e in Event, where: e.room_id == ^room_id and e.user_id == ^user_id
+
     query
-    |> Repo.all
+    |> Repo.all()
     |> Repo.preload(:user)
   end
 
@@ -50,8 +56,12 @@ defmodule Blabl.Messenger do
   """
   def create_message(attrs) do
     %Event{}
-    |> Event.changeset(Map.put(attrs, :type, "message"))
-    |> Repo.insert!
+    |> Event.changeset(Map.put(attrs, "type", "message"))
+    |> Repo.insert!()
     |> Repo.preload(:user)
+  end
+
+  def change_message do
+    Event.changeset(%Event{})
   end
 end
