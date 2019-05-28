@@ -64,4 +64,11 @@ defmodule Blabl.Messenger do
   def change_message do
     Event.changeset(%Event{})
   end
+
+  def subscribe_to_rooms(rooms) do
+    Enum.each(rooms, fn room -> BlablWeb.Endpoint.subscribe(topic(room)) end)
+  end
+
+  def topic(room) when is_map(room), do: "room:#{room.id}"
+  def topic(room_id), do: "room:#{room_id}"
 end
