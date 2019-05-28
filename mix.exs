@@ -55,6 +55,9 @@ defmodule Blabl.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
 
+      # Common
+      {:timex, "~> 3.1"},
+
       # Autorization & cryptography
       {:comeonin, "~> 5.0"},
       {:bcrypt_elixir, "~> 2.0"},
