@@ -9,7 +9,7 @@
     <%= for {id, room} <- @rooms do %>
       <%= if id == @active_room_id do %>
         <div class="rooms__item -active" phx-click="show_room" phx-value=<%= room.id %>>
-      <%= else %>
+      <% else %>
         <div class="rooms__item" phx-click="show_room" phx-value=<%= room.id %>>
       <% end %>
         <div class="rooms__item__content">

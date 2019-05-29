@@ -34,6 +34,9 @@ defmodule Blabl.Messenger do
     end
   end
 
+  @doc """
+  Users count in room
+  """
   def room_users_count(room_id) do
     Repo.one(from ur in UserRoom, select: count(ur.id), where: ur.room_id == ^room_id)
   end

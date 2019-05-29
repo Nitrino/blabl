@@ -1,6 +1,8 @@
 defmodule BlablWeb.MessengerView do
   use BlablWeb, :view
 
+  alias Blabl.Messenger
+
   def initials(name) do
     name
     |> String.slice(0..1)
@@ -13,4 +15,6 @@ defmodule BlablWeb.MessengerView do
 
   def event_time(nil), do: ""
   def event_time(event), do: Timex.format!(event.inserted_at, "%H:%M", :strftime)
+
+  def room_users_count(room), do: Messenger.room_users_count(room.id)
 end
