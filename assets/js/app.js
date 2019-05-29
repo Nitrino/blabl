@@ -23,3 +23,23 @@ import LiveSocket from "phoenix_live_view";
 
 let liveSocket = new LiveSocket("/live");
 liveSocket.connect();
+
+document.addEventListener("phx:update", function(event) {
+  const chatHeaderElement = document.querySelector(".js-chat-header")
+  if (chatHeaderElement) {
+    const chatUsersElement = document.querySelector(".js-chat-users")
+    const chatContentElement = document.querySelector(".js-chat-content")
+    chatHeaderElement.addEventListener("click", function (event) {
+      console.log(chatContentElement.style.display);
+
+      if (chatContentElement.style.display == "flex") {
+        chatContentElement.style.display = "none";
+        chatUsersElement.style.display = "block";
+      } else {
+        chatUsersElement.style.display = "none";
+        chatContentElement.style.display = "flex";
+      }
+    })
+  }
+});
+

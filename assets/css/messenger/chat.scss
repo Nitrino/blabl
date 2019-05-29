@@ -1,8 +1,8 @@
 .chat {
   background: #FFFFFF;
+  border-radius: 10px 10px 0 0;
   height: 100%;
   width: 100%;
-  border-radius: 10px 10px 0 0;
   display: flex;
   flex-direction: column;
 
@@ -26,6 +26,13 @@
   }
 
   &__content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__events {
     padding: 0 40px 40px 40px;
     height: 100%;
     flex: 1;
@@ -93,6 +100,40 @@
       &:focus ~ img{
         filter: grayscale(0);
       }
+    }
+  }
+
+  &__users {
+    display: none;
+    padding: 20px 40px 40px 40px;
+
+    &__item {
+      padding: 10px 15px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      background: #FFFFFF;
+      box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.12);
+      border-radius: 100px;
+      font-size: 13px;
+    }
+
+    &__info {
+      margin-left: 15px;
+    }
+
+    &__avatar {
+      width: 35px;
+      height: 35px;
+    }
+
+    &__name {
+      font-weight: 500;
+    }
+
+    &__last-seen {
+      opacity: 0.5;
     }
   }
 }

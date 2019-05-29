@@ -1,5 +1,5 @@
 <div class="chat">
-  <div class="chat__header">
+  <div class="chat__header js-chat-header">
     <div class="avatar-circle chat__event__avatar">
       <%= initials(@room.name) %>
     </div>
@@ -13,36 +13,55 @@
       </div>
     </div>
   </div>
-  <div class="chat__content">
-    <%= for event <- Enum.reverse(@room.events) do %>
-      <div class="chat__event">
-        <%= if event.type == "message" do %>
-          <div class="avatar-circle chat__event__avatar">
-            <%= initials(event.user.login) %>
-          </div>
-          <div class="chat__event__content">
-            <div class="chat__event__text">
-              <%= event.text %>
+  <div class="chat__content js-chat-content">
+    <div class="chat__events">
+      <%= for event <- Enum.reverse(@room.events) do %>
+        <div class="chat__event">
+          <%= if event.type == "message" do %>
+            <div class="avatar-circle chat__event__avatar">
+              <%= initials(event.user.login) %>
             </div>
-            <div class="chat__event__time">
-              <%= event_time(event) %>
+            <div class="chat__event__content">
+              <div class="chat__event__text">
+                <%= event.text %>
+              </div>
+              <div class="chat__event__time">
+                <%= event_time(event) %>
+              </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="chat__message">
+      <%= form_for @message, "#", [phx_submit: :send_message, autocomplete: "off"], fn _f -> %>
+        <%= hidden_input :message, :user_id, value: @current_user.id %>
+        <%= hidden_input :message, :room_id, value: @room.id %>
+        <div class="chat__message__content">
+          <%= text_input :message, :text,
+            placeholder: "Write a message", autocomplete: "off", class: "chat__message__input" %>
+          <button type="submit">
+            <img src="<%= Routes.static_path(@socket, "/images/icons/plane.svg") %>" alt="Send message button"/>
+          </button>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div class="chat__message">
-    <%= form_for @message, "#", [phx_submit: :send_message, autocomplete: "off"], fn _f -> %>
-      <%= hidden_input :message, :user_id, value: @current_user.id %>
-      <%= hidden_input :message, :room_id, value: @room.id %>
-      <div class="chat__message__content">
-        <%= text_input :message, :text,
-          placeholder: "Write a message", autocomplete: "off", class: "chat__message__input" %>
-        <button type="submit">
-          <img src="<%= Routes.static_path(@socket, "/images/icons/plane.svg") %>" alt="Send message button"/>
-        </button>
+  <div class="chat__users js-chat-users">
+    <%= for user <- Enum.reverse(@room.users) do %>
+      <div class="chat__users__item">
+        <div class="avatar-circle chat__users__avatar">
+          <%= initials(user.login) %>
+        </div>
+        <div class="chat__users__info">
+          <div class="chat__users__name">
+            <%= user.login %>
+          </div>
+          <div class="chat__users__last-seen">
+            last seen recently
+          </div>
+        </div>
       </div>
     <% end %>
   </div>

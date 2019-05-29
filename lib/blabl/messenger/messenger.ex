@@ -25,6 +25,7 @@ defmodule Blabl.Messenger do
     query
     |> Repo.all()
     |> Repo.preload(events: from(e in Event, order_by: [desc: e.inserted_at], limit: 50, preload: :user))
+    |> Repo.preload(:users)
   end
 
   def list_rooms_map(current_user) do
